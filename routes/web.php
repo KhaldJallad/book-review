@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ReviewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('book.index');
 });
 
-Route::resource('book', BookController::class);
+Route::resource('book', BookController::class)->only(['index', 'show']);
+
+Route::resource('book.reviews', ReviewsController::class)
+    ->scoped(['reviews' => 'book'])
+    ->only(['create', 'store']);
