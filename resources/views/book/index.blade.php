@@ -44,6 +44,7 @@
                     </div>
                 </div>
             </li>
+
         @empty
             <li class="mb-4">
                 <div class="empty-book-item">
@@ -53,4 +54,8 @@
             </li>
         @endforelse
     </ul>
+
+    @if ($books->count())
+        {{ $books->reviews->links() }}
+    @endif
 @endsection
